@@ -5,8 +5,8 @@ public class SelectionManager : MonoBehaviour
 {
     private UnitSelecting _selectUnit; // В будущем сделаем List
                                         
-    private void OnEnable() => InputManager.OnBittonClick += ClickInUnit;
-    private void OnDisable() => InputManager.OnBittonClick -= ClickInUnit;
+    private void OnEnable() => InputManager.OnButtonClick += ClickInUnit;
+    private void OnDisable() => InputManager.OnButtonClick -= ClickInUnit;
     private void ClickInUnit(ClickEntity clickEntity)
     {
         if (clickEntity.button != Mouse.current.leftButton )

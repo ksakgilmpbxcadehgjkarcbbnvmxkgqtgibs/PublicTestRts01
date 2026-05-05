@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
-public class ClickEntity
+public struct ClickEntity
 {
     public ButtonControl button;
     public RaycastHit raycastHit;

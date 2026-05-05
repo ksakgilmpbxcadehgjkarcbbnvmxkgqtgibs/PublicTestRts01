@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class InputManager : MonoBehaviour
 {
-    public static event Action<ClickEntity> OnBittonClick;
+    public static event Action<ClickEntity> OnButtonClick;
 
     private Camera _mainCamera;
     private void Awake() => _mainCamera = Camera.main;
@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             var click = ClickEntity.CreateClick(buttonControl, hit);
-            OnBittonClick.Invoke(click);
+            OnButtonClick.Invoke(click);
         }
     }
 }

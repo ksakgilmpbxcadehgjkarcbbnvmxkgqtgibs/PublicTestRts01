@@ -9,7 +9,7 @@ public class UnitVisuals : MonoBehaviour
 
     public void ChandgeColorMovementStop()=> SetColorUnit(Color.white);
 
-    public void ChandgeColorMovement()=> SetColorUnit(Color.black);
+    public void ChangeColorMovement()=> SetColorUnit(Color.black);
 
     private void Start()
     {

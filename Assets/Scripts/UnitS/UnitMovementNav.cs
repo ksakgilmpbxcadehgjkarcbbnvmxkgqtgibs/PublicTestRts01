@@ -20,8 +20,8 @@ public class UnitMovementNav : MonoBehaviour
         _unitSelecting = GetComponent<UnitSelecting>();
     }
 
-    private void OnEnable() => InputManager.OnBittonClick += MoveToTarget;
-    private void OnDisable() => InputManager.OnBittonClick -= MoveToTarget;
+    private void OnEnable() => InputManager.OnButtonClick += MoveToTarget;
+    private void OnDisable() => InputManager.OnButtonClick -= MoveToTarget;
 
     private void MoveToTarget(ClickEntity target)
     {
@@ -34,7 +34,7 @@ public class UnitMovementNav : MonoBehaviour
         _agent.SetDestination(target.raycastHit.point);
         _target = target.raycastHit.point;
 
-        _unitVisuals.ChandgeColorMovement();
+        _unitVisuals.ChangeColorMovement();
     }
     private void Update()
     {

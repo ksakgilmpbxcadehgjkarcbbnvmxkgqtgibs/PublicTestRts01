@@ -12,8 +12,8 @@ public class UnitSpawner : MonoBehaviour
     private float _cooldownTimer = 5f;
     private float _nextSpawnTime = 0;
 
-    private void OnEnable() => InputManager.OnBittonClick += SpawnUnit;
-    private void OnDisable() => InputManager.OnBittonClick -= SpawnUnit;
+    private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
+    private void OnDisable() => InputManager.OnButtonClick -= SpawnUnit;
 
     private void SpawnUnit(ClickEntity clickEntity)
     {
