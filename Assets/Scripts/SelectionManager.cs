@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+
 
 public class SelectionManager : MonoBehaviour
 {
-    [SerializeField]
-    private Image SelectionBox; 
-
     private List<UnitSelecting> _selectUnits = new List<UnitSelecting>();
 
     private void OnEnable()

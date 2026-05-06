@@ -1,8 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -12,11 +10,17 @@ public class InputManager : MonoBehaviour
     public static event Action<ClickEntity> OnButtonClick;
     public static event Action<List<UnitSelecting>> OnGroupClick;
 
+    [SerializeField]
+    private UiManager _uiManager;
+
     private Camera _mainCamera;
 
     private Vector2 _positionMouseInWorld;
 
-    private void Awake() => _mainCamera = Camera.main;
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
     private void Update()
     {
         if (Mouse.current != null)
@@ -29,12 +33,28 @@ public class InputManager : MonoBehaviour
                 _positionMouseInWorld = Mouse.current.position.ReadValue();
             }
 
+            if (Mouse.current.leftButton.isPressed)
+            {
+                Vector2 _endPosionMouseInWorld = Mouse.current.position.ReadValue();
+
+                float minX = Mathf.Min(_positionMouseInWorld.x, _endPosionMouseInWorld.x);
+                float minY = Mathf.Min(_positionMouseInWorld.y, _endPosionMouseInWorld.y);
+                float maxX = Mathf.Max(_positionMouseInWorld.x, _endPosionMouseInWorld.x);
+                float maxY = Mathf.Max(_positionMouseInWorld.y, _endPosionMouseInWorld.y);
+
+                _uiManager.SetBoardSize(maxX - minX, maxY - minY);
+                _uiManager.SetBoardPosion(minX, minY);
+
+                _uiManager.TurnOn();
+            }
+
             if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
                 Vector2 _endPosionMouseInWorld = Mouse.current.position.ReadValue();
 
                 if (!VectorHelper.IsSameVector(_endPosionMouseInWorld, _positionMouseInWorld)) 
-                {
+                {                  
+
                     var masUnit = FindObjectsByType<UnitSelecting>(FindObjectsSortMode.None).ToList();
 
                     var masSelecting = masUnit.Where(
@@ -44,6 +64,9 @@ public class InputManager : MonoBehaviour
                         .ToList();
                 
                     OnGroupClick.Invoke(masSelecting);
+
+                    _uiManager.TurnOff();
+                    _uiManager.SetBoardSize(Vector2.zero);
                 }
                 else
                 {
