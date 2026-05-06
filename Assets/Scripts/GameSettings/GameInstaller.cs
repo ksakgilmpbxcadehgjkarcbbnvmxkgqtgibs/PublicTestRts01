@@ -16,7 +16,7 @@ public class GameInstaller : MonoInstaller
         BindingSimpleZenject<UnitListManager>();
 
 
-        BindingFactoryZenject<UnitFabrica, UnitFabrica.Factory,UnitLocalInstaller>(_unitPrefab, "Units");
+        BindingFactoryZenject<UnitFactory, UnitFactory.Factory,UnitLocalInstaller>(_unitPrefab, "Units");
     }
 
     private void BindingSimpleZenject<T>() => Container.Bind<T>().AsSingle();
