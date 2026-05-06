@@ -14,7 +14,6 @@ public class UnitMovementNav : MonoBehaviour
 
     private void Awake()
     {
-        // Кэшируем ссылку на компонент. данная функция слишком тяжелая.
         _agent = GetComponent<NavMeshAgent>();
         _unitVisuals = GetComponent<UnitVisuals>();
         _unitSelecting = GetComponent<UnitSelecting>();
@@ -38,6 +37,12 @@ public class UnitMovementNav : MonoBehaviour
     }
     private void Update()
     {
+        if (!_agent.isOnNavMesh)
+            return;
+
+        if (_target == null)
+            return;
+
         if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
             _unitVisuals.ChandgeColorMovementStop();

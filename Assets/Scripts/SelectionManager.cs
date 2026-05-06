@@ -1,27 +1,62 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
-    private UnitSelecting _selectUnit; // В будущем сделаем List
-                                        
-    private void OnEnable() => InputManager.OnButtonClick += ClickInUnit;
-    private void OnDisable() => InputManager.OnButtonClick -= ClickInUnit;
+    [SerializeField]
+    private Image SelectionBox; 
+
+    private List<UnitSelecting> _selectUnits = new List<UnitSelecting>();
+
+    private void OnEnable()
+    {
+        InputManager.OnButtonClick += ClickInUnit;
+        InputManager.OnGroupClick += GroupClick;
+
+    }
+    private void OnDisable()
+    {
+        InputManager.OnButtonClick -= ClickInUnit;
+        InputManager.OnGroupClick -= GroupClick;
+    }
+
     private void ClickInUnit(ClickEntity clickEntity)
     {
-        if (clickEntity.button != Mouse.current.leftButton )
+        if (clickEntity.button != Mouse.current.leftButton)
             return;
 
         if (clickEntity.raycastHit.collider.TryGetComponent(out UnitSelecting unitSelecting))
         {
-            _selectUnit?.Deselect();
+            UnSelectingGtoup();
+
             unitSelecting.Select();
-            _selectUnit = unitSelecting;
+            _selectUnits.Add(unitSelecting);
         }
         else
         {
-            _selectUnit?.Deselect();
-            _selectUnit = null;
+            UnSelectingGtoup();
         }
+    }
+
+    private void GroupClick(List<UnitSelecting> masSelect)
+    {
+        UnSelectingGtoup();
+        _selectUnits = masSelect;
+
+        foreach (var unit in _selectUnits)
+        {
+            unit.Select();
+        }
+    }
+
+    private void UnSelectingGtoup()
+    {
+        foreach (var unit in _selectUnits)
+        {
+            unit.Deselect();
+        }
+        _selectUnits.Clear();
     }
 }

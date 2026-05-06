@@ -6,10 +6,7 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField]
     private GameObject _unitPrefab;
 
-    [SerializeField]
-    private float _spawnRadius = 1f;
-
-    private float _cooldownTimer = 5f;
+    private float _cooldownTimer = 1f;
     private float _nextSpawnTime = 0;
 
     private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
