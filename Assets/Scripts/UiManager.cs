@@ -7,6 +7,11 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     private Image _selectionBox;
 
+    private void Start()
+    {
+        _selectionBox.gameObject.SetActive(false);
+    }
+
     public void SetBoardSize(float width,float hight) => 
         _selectionBox.rectTransform.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(hight));
     public void SetBoardSize(Vector2 vector2) =>
