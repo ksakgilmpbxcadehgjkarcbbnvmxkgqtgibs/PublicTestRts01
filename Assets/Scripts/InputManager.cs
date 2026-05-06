@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
     public static event Action<ClickEntity> OnButtonClick;
     public static event Action<List<UnitSelecting>> OnGroupClick;
 
+    private List<UnitSelecting> masTempSelect = new List<UnitSelecting>();
+
     [SerializeField]
     private UiManager _uiManager;
 
@@ -59,13 +61,15 @@ public class InputManager : MonoBehaviour
                 {                  
                     var masUnit = _unitListManager.GetUnits();
 
-                    var masSelecting = masUnit.Where(
+                    masTempSelect = masUnit
+                        .Where(
                         x => VectorHelper.IsUnitRec(_mainCamera.WorldToScreenPoint(x.transform.position),
                         _positionMouseInWorld, 
                         _endPosionMouseInWorld))
+                        .Select(x=>x.GetComponent<UnitSelecting>())
                         .ToList();
-                
-                    OnGroupClick.Invoke(masSelecting);
+
+                    OnGroupClick.Invoke(masTempSelect);
 
                     _uiManager.TurnOff();
                     _uiManager.SetBoardSize(Vector2.zero);
@@ -80,6 +84,14 @@ public class InputManager : MonoBehaviour
         {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
                 CreateClickInvoke(Keyboard.current.spaceKey);
+
+            if (Keyboard.current.dKey.wasPressedThisFrame)
+            {
+                masTempSelect
+                    .Select(x => x.GetComponent<UnitAttribute>())
+                    .ToList()
+                    .ForEach(x=>x.TakeDamage(50));
+            }
         }
     }
     private void CreateClickInvoke(ButtonControl buttonControl)

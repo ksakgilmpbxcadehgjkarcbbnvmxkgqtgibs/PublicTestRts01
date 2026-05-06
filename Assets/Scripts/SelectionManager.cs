@@ -52,7 +52,10 @@ public class SelectionManager : MonoBehaviour
     {
         foreach (var unit in _selectUnits)
         {
-            unit.Deselect();
+            if (unit != null)
+            {
+                unit.Deselect();
+            }
         }
         _selectUnits.Clear();
     }

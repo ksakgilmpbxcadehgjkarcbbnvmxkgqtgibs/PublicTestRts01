@@ -13,7 +13,7 @@ public class UnitSpawner : MonoBehaviour
     private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
     private void OnDisable() => InputManager.OnButtonClick -= SpawnUnit;
 
-    public static event Action<UnitSelecting> OnSpawnUnit;
+    public static event Action<GameObject> OnSpawnUnit;
 
     private void SpawnUnit(ClickEntity clickEntity)
     {
@@ -30,6 +30,6 @@ public class UnitSpawner : MonoBehaviour
         _nextSpawnTime = _cooldownTimer + Time.time;
         var unit = Instantiate(_unitPrefab, clickEntity.raycastHit.point, Quaternion.identity);
 
-        OnSpawnUnit.Invoke(unit.GetComponent<UnitSelecting>());
+        OnSpawnUnit.Invoke(unit);
     }
 }

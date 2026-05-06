@@ -4,14 +4,31 @@ using UnityEngine;
 
 public class UnitListManager : MonoBehaviour
 {
-    private List<UnitSelecting> UnitsGame = new List<UnitSelecting>();
-    public List<UnitSelecting> GetUnits() => UnitsGame;
+    private List<GameObject> UnitsGame = new List<GameObject>();
+    public List<GameObject> GetUnits() => UnitsGame;
 
     private void OnEnable() => UnitSpawner.OnSpawnUnit += AddUnitInList;
     private void OnDisable() => UnitSpawner.OnSpawnUnit -= AddUnitInList;
 
-    private void AddUnitInList(UnitSelecting unit)
+    private void AddUnitInList(GameObject unit)
     {
         UnitsGame.Add(unit);
+
+        var attr = unit.GetComponent<UnitAttribute>();
+        if (attr != null)
+        {
+            attr.OnDeath += RemoveFromList;
+        }
+    }
+    public void RemoveFromList(GameObject unit)
+    {
+        var attr = unit.GetComponent<UnitAttribute>();
+        if (attr != null)
+        {
+            attr.OnDeath -= RemoveFromList;
+        }
+        UnitsGame.Remove(unit);
+        unit.SetActive(false);
+        Destroy(unit);
     }
 }
