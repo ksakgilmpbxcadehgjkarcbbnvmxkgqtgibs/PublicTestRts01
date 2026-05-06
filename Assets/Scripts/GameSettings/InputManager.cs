@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using Zenject;
 
 public class InputManager : MonoBehaviour
 {
@@ -12,20 +13,17 @@ public class InputManager : MonoBehaviour
 
     private List<UnitSelecting> masTempSelect = new List<UnitSelecting>();
 
-    [SerializeField]
+    [Inject]
     private UiManager _uiManager;
 
-    [SerializeField]
+    [Inject]
     private UnitListManager _unitListManager;
 
+    [Inject]
     private Camera _mainCamera;
 
     private Vector2 _positionMouseInWorld;
 
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
     private void Update()
     {
         if (Mouse.current != null)
@@ -64,9 +62,9 @@ public class InputManager : MonoBehaviour
                     masTempSelect = masUnit
                         .Where(
                         x => VectorHelper.IsUnitRec(_mainCamera.WorldToScreenPoint(x.transform.position),
-                        _positionMouseInWorld, 
+                        _positionMouseInWorld,
                         _endPosionMouseInWorld))
-                        .Select(x=>x.GetComponent<UnitSelecting>())
+                        .Select(x => x.GetComponent<UnitSelecting>())
                         .ToList();
 
                     OnGroupClick.Invoke(masTempSelect);

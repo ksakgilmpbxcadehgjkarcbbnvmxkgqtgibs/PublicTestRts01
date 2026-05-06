@@ -1,10 +1,11 @@
 using UnityEngine;
+using Zenject;
 
 public class UnitVisuals : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
 
-    [SerializeField]
+    [Inject(Id = "SelectionCircle")]
     private GameObject _selectionCircle;
 
     public void ChandgeColorMovementStop()=> SetColorUnit(Color.white);

@@ -1,19 +1,21 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class UnitSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _unitPrefab;
+    [Inject]
+    private UnitFabrica.Factory _unitFactory;
+
+    [Inject]
+    private UnitListManager _unitListManager;
 
     private float _cooldownTimer = 1f;
     private float _nextSpawnTime = 0;
 
     private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
     private void OnDisable() => InputManager.OnButtonClick -= SpawnUnit;
-
-    public static event Action<GameObject> OnSpawnUnit;
 
     private void SpawnUnit(ClickEntity clickEntity)
     {
@@ -28,8 +30,8 @@ public class UnitSpawner : MonoBehaviour
             return;
 
         _nextSpawnTime = _cooldownTimer + Time.time;
-        var unit = Instantiate(_unitPrefab, clickEntity.raycastHit.point, Quaternion.identity);
+         var unitCreate = _unitFactory.Create(clickEntity.raycastHit.point, Quaternion.identity);
 
-        OnSpawnUnit.Invoke(unit);
+        _unitListManager.AddUnitInList(unitCreate.gameObject);
     }
 }

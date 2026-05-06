@@ -13,7 +13,8 @@ public class UnitAttribute : MonoBehaviour
         hitPoint -= damage;
         if (hitPoint <= 0)
         {
-            OnDeath.Invoke(gameObject,this);              
+            OnDeath.Invoke(gameObject,this);
+            Destroy(gameObject);
         }
     }
 }

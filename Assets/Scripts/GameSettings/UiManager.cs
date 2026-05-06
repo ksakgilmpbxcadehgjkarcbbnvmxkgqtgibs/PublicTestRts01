@@ -1,10 +1,10 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField]
+    [Inject(Id = "SelectionBox")]
     private Image _selectionBox;
 
     private void Start()

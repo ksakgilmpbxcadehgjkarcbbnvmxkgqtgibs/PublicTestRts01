@@ -3,33 +3,21 @@ using UnityEngine;
 public class VectorHelper
 {
     /// <summary>
-    /// Путем скалярного перемножения и отбрасывания на плоскость находит находиться ли точка внутри прям-ка
+    /// Упрощенным способом ищем юнит ли в рамке
     /// </summary>
+
     public static bool IsUnitRec(Vector3 unitCameraPosion, Vector3 userRectSelectOne, Vector3 userRectSelectTwo)
     {
-        if (unitCameraPosion.z < 0)
-            return false;
+        if (unitCameraPosion.z < 0) return false;
 
-        // Задаем вектора в плоскости прям-ка
-        Vector2 P = new Vector2(unitCameraPosion.x, unitCameraPosion.y);
-        Vector2 A = userRectSelectOne;
-        Vector2 C = userRectSelectTwo;
+        float xMin = Mathf.Min(userRectSelectOne.x, userRectSelectTwo.x);
+        float xMax = Mathf.Max(userRectSelectOne.x, userRectSelectTwo.x);
+        float yMin = Mathf.Min(userRectSelectOne.y, userRectSelectTwo.y);
+        float yMax = Mathf.Max(userRectSelectOne.y, userRectSelectTwo.y);
 
-        // Находим вектора в сторону рамки
-        Vector2 AB = new Vector2(C.x - A.x, 0);
-        Vector2 AD = new Vector2(0, C.y - A.y);
-        Vector2 AP = P - A;
+        Rect selectionRect = new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
 
-        //Получаем проекции 
-        float dotAP_AB = AP.x * AB.x + AP.y * AB.y;
-        float dotAP_AD = AP.x * AD.x + AP.y * AD.y;
-
-        float dotAB_AB = AB.x * AB.x + AB.y * AB.y;
-        float dotAD_AD = AD.x * AD.x + AD.y * AD.y;
-
-        // Финальная проверка
-        return (dotAP_AB >= 0 && dotAP_AB <= dotAB_AB) &&
-               (dotAP_AD >= 0 && dotAP_AD <= dotAD_AD);
+        return selectionRect.Contains(unitCameraPosion);
     }
 
     /// <summary>

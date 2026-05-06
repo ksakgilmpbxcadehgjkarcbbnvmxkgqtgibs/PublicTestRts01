@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &308052187756891810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7855581539600833234}
+  - component: {fileID: 3450826412871017774}
+  m_Layer: 0
+  m_Name: UnirFabrica
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7855581539600833234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308052187756891810}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2401505, y: 0.62823, z: 0.5017204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3922628570937885056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3450826412871017774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308052187756891810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329143871c900ca4cb9eb45af9466fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitFabrica
 --- !u!1 &6843849512017345864
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,6 +61,9 @@ GameObject:
   - component: {fileID: 1094170425240560175}
   - component: {fileID: -6591053141297825934}
   - component: {fileID: -7914577471121322205}
+  - component: {fileID: 7020934434921407531}
+  - component: {fileID: 6101670645081113851}
+  - component: {fileID: 4869547521783161586}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -38,6 +85,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1228422867203430017}
+  - {fileID: 7855581539600833234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8331322873880199493
@@ -130,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205b1aa1eba89745b1fc551a9f8e386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitVisuals
-  _selectionCircle: {fileID: 8849931323925439569}
 --- !u!195 &1993936626470676804
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -189,6 +236,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897ed33e6c8e0c144bc48b1625cf5a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAttribute
+  hitPoint: 100
+--- !u!114 &7020934434921407531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843849512017345864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329143871c900ca4cb9eb45af9466fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitFabrica
+--- !u!114 &6101670645081113851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843849512017345864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea450f61f34ec7c49a59a0f921b593d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitLocalInstaller
+  _selectionCircle: {fileID: 8849931323925439569}
+  _unitComponent: {fileID: 3450826412871017774}
+--- !u!114 &4869547521783161586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843849512017345864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 1
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &8849931323925439569
 GameObject:
   m_ObjectHideFlags: 0
