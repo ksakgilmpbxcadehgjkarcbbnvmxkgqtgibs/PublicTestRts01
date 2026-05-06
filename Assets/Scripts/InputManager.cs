@@ -13,6 +13,9 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private UiManager _uiManager;
 
+    [SerializeField]
+    private UnitListManager _unitListManager;
+
     private Camera _mainCamera;
 
     private Vector2 _positionMouseInWorld;
@@ -54,8 +57,7 @@ public class InputManager : MonoBehaviour
 
                 if (!VectorHelper.IsSameVector(_endPosionMouseInWorld, _positionMouseInWorld)) 
                 {                  
-
-                    var masUnit = FindObjectsByType<UnitSelecting>(FindObjectsSortMode.None).ToList();
+                    var masUnit = _unitListManager.GetUnits();
 
                     var masSelecting = masUnit.Where(
                         x => VectorHelper.IsUnitRec(_mainCamera.WorldToScreenPoint(x.transform.position),

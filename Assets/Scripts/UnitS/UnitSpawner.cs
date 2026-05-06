@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,8 @@ public class UnitSpawner : MonoBehaviour
     private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
     private void OnDisable() => InputManager.OnButtonClick -= SpawnUnit;
 
+    public static event Action<UnitSelecting> OnSpawnUnit;
+
     private void SpawnUnit(ClickEntity clickEntity)
     {
         if (Time.time < _nextSpawnTime)
@@ -25,6 +28,8 @@ public class UnitSpawner : MonoBehaviour
             return;
 
         _nextSpawnTime = _cooldownTimer + Time.time;
-        Instantiate(_unitPrefab, clickEntity.raycastHit.point, Quaternion.identity);
+        var unit = Instantiate(_unitPrefab, clickEntity.raycastHit.point, Quaternion.identity);
+
+        OnSpawnUnit.Invoke(unit.GetComponent<UnitSelecting>());
     }
 }
