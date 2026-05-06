@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class UnitFabrica : MonoBehaviour
+public class UnitFactory : MonoBehaviour
 {
     [Inject]
     public void Construct(Vector3 position, Quaternion rotation)
@@ -9,7 +9,7 @@ public class UnitFabrica : MonoBehaviour
         transform.position = position;
         transform.rotation = rotation;
     }
-    public class Factory : PlaceholderFactory<Vector3, Quaternion, UnitFabrica>
+    public class Factory : PlaceholderFactory<Vector3, Quaternion, UnitFactory>
     {
     }
 }

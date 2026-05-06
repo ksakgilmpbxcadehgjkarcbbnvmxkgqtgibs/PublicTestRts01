@@ -6,7 +6,7 @@ using Zenject;
 public class UnitSpawner : MonoBehaviour
 {
     [Inject]
-    private UnitFabrica.Factory _unitFactory;
+    private UnitFactory.Factory _unitFactory;
 
     [Inject]
     private UnitListManager _unitListManager;

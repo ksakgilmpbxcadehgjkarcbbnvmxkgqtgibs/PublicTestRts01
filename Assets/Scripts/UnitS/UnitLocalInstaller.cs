@@ -16,6 +16,6 @@ public class UnitLocalInstaller : MonoInstaller
 
         Container.BindInstance(_selectionCircle).WithId("SelectionCircle");
 
-        Container.Bind<UnitFabrica>().FromComponentOnRoot().AsSingle();
+        Container.Bind<UnitFactory>().FromComponentOnRoot().AsSingle();
     }
 }
