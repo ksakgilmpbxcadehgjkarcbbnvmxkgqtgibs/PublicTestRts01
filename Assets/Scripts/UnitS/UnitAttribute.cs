@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitAttribute : MonoBehaviour
 {
-    public event Action<GameObject> OnDeath;
+    public event Action<GameObject, UnitAttribute> OnDeath;
 
     [SerializeField]
     private float hitPoint = 100;
@@ -13,7 +13,7 @@ public class UnitAttribute : MonoBehaviour
         hitPoint -= damage;
         if (hitPoint <= 0)
         {
-            OnDeath.Invoke(gameObject);              
+            OnDeath.Invoke(gameObject,this);              
         }
     }
 }

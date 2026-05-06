@@ -20,13 +20,9 @@ public class UnitListManager : MonoBehaviour
             attr.OnDeath += RemoveFromList;
         }
     }
-    public void RemoveFromList(GameObject unit)
+    public void RemoveFromList(GameObject unit, UnitAttribute attr)
     {
-        var attr = unit.GetComponent<UnitAttribute>();
-        if (attr != null)
-        {
-            attr.OnDeath -= RemoveFromList;
-        }
+        attr.OnDeath -= RemoveFromList;
         UnitsGame.Remove(unit);
         unit.SetActive(false);
         Destroy(unit);
