@@ -32,8 +32,15 @@ public class UnitMovementNav : MonoBehaviour
             .AddTo(this);
     }
 
+    public void Stop()
+    {
+        _agent.enabled = false;
+    }
+
     private void MoveToTarget(ClickEntity target)
     {
+        if (!_agent.isActiveAndEnabled)
+            return;
         _agent.SetDestination(target.raycastHit.point);
         _target = target.raycastHit.point;
 

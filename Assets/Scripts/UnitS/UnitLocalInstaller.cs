@@ -16,6 +16,12 @@ public class UnitLocalInstaller : MonoInstaller
 
         Container.BindInstance(_selectionCircle).WithId("SelectionCircle");
 
-        Container.Bind<UnitFactory>().FromComponentOnRoot().AsSingle();
+        BindingZenject<UnitMovementNav>();
+        BindingZenject<UnitVisuals>();
+        BindingZenject<UnitSelecting>();
+        BindingZenject<UnitFactory>();
+
     }
+
+    private void BindingZenject<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
 }

@@ -9,8 +9,8 @@ public class UnitVisuals : MonoBehaviour
     private GameObject _selectionCircle;
 
     public void ChandgeColorMovementStop()=> SetColorUnit(Color.white);
-
     public void ChangeColorMovement()=> SetColorUnit(Color.black);
+    public void ChandgeColorMovementDead() => SetColorUnit(Color.darkRed);
 
     private void Start()
     {
@@ -27,16 +27,9 @@ public class UnitVisuals : MonoBehaviour
 
     private void SetColorUnit(Color color)
     {
-        // Создаем блок свойств.
         MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
-
-        // Читаем текущие свойства кэша
         meshRenderer.GetPropertyBlock(propBlock);
-
-        // Обращаемся к шейдеру
         propBlock.SetColor("_BaseColor", color);
-
-        // Применяем блок к мешу. Копия материяла не создается!
         meshRenderer.SetPropertyBlock(propBlock);
     }
        
