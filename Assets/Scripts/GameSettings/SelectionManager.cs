@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-
 public class SelectionManager : MonoBehaviour
 {
     private List<UnitSelecting> _selectUnits = new List<UnitSelecting>();

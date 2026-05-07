@@ -13,15 +13,14 @@ public class GameInstaller : MonoInstaller
         BindComponent<UiManager>();
         BindComponent<SelectionManager>();
         BindComponent<InputManager>();
-        BindInstance(Camera.main);
 
-        ;
+        Container.BindInstance(Camera.main).AsSingle();
+
         Binding<UnitListManager>();
 
 
         BindingFactory<UnitFactory, UnitFactory.Factory,UnitLocalInstaller>(_unitPrefab, "Units");
     }
-    private void BindInstance(Object ob) => Container.BindInstance(ob).AsSingle();
     private void Binding<T>() => Container.Bind<T>().AsSingle();
     private void BindComponent<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
     private void BindById<T>(string Id) => Container.Bind<T>().WithId(Id).FromComponentInHierarchy().AsSingle();
