@@ -1,12 +1,52 @@
-RTS Core Prototype (Unity)
+# RTS Prototype (Unity)
 
-Базовый прототип логики выделения и перемещения юнитов для RTS. Проект создан в рамках интенсивного перекатывания из .NET/WPF энтерпрайза (5+ лет опыта) в Unity.
+Технический RTS-прототип, сфокусированный на масштабируемой игровой архитектуре и чистом коде.  
+Technical RTS prototype focused on scalable gameplay architecture and clean code practices.
 
-Что уже реализовано под капотом:
-NavMesh routing (динамическое перемещение юнитов).
-Логика Raycast-выделения (одиночные юниты + смена стейта/визуала).
-Математика Drag-Box Selection (выделение группы юнитов рамкой).
-Unity UI / UI Toolkit: прикручивание визуальной отрисовки Drag-Box рамки поверх готовой логики.
-Zenject (DI): рефакторинг текущей архитектуры под Dependency Injection для избавления от сильной связности (перенос моих паттернов из .NET в реалии Unity).
-UniRx: внедрение реактивного стейт-менеджмента юнитов
-UniTask: Асинхронный пайплайн без оглядки на Garbage Collector.
+## Features / Возможности
+
+- RTS-механика выбора и перемещения юнитов  
+  RTS-style unit selection and movement
+
+- Поведение юнитов разделено на независимые модульные компоненты  
+  Unit behaviour split into modular components
+
+- Реактивная обработка событий с использованием UniRx  
+  Reactive event handling with UniRx
+
+- Асинхронные операции через UniTask  
+  Async operations via UniTask
+
+- Dependency Injection с использованием Zenject  
+  Dependency Injection using Zenject
+
+- Слабо связанная игровая архитектура  
+  Decoupled gameplay systems
+
+- Базовый UI для выбора юнитов  
+  Basic UI for unit selection
+
+## Architecture / Архитектура
+
+Проект построен с использованием принципов разделения ответственности.  
+The project follows separation of concerns principles.
+
+- Игровая логика отделена от представления  
+  Gameplay logic separated from presentation
+
+- Модульное поведение юнитов  
+  Modular unit behaviours
+
+- Сервис-ориентированная архитектура  
+  Service-oriented systems
+
+- Dependency Injection через Zenject  
+  Dependency injection via Zenject
+
+## Tech Stack / Технологии
+
+- Unity
+- C#
+- Zenject
+- UniRx
+- UniTask

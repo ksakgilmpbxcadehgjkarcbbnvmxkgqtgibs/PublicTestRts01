@@ -16,13 +16,13 @@ public class UnitLocalInstaller : MonoInstaller
 
         Container.BindInstance(_selectionCircle).WithId("SelectionCircle");
 
-        BindingZenject<UnitMovementNav>();
-        BindingZenject<UnitVisuals>();
-        BindingZenject<UnitSelecting>();
-        BindingZenject<UnitFactory>();
-        BindingZenject<UnitAttribute>();
+        BindComponent<UnitMovementNav>();
+        BindComponent<UnitVisuals>();
+        BindComponent<UnitSelecting>();
+        BindComponent<UnitFactory>();
+        BindComponent<UnitAttribute>();
 
     }
 
-    private void BindingZenject<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
+    private void BindComponent<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
 }

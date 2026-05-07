@@ -23,7 +23,7 @@ public class UnitSpawner : MonoBehaviour
             .OnButtonClickObservable
             .Where(clickEntity =>clickEntity.button == Keyboard.current.spaceKey 
             && Time.time > _nextSpawnTime 
-            && clickEntity.raycastHit.collider != null)// ≈сли игрок тыкает вне игрово пол€ ... как то
+            && clickEntity.raycastHit.collider != null)
             .Subscribe(SpawnUnit)
             .AddTo(this);
     }

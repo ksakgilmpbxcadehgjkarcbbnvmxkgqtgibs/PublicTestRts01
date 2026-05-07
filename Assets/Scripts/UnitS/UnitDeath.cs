@@ -47,7 +47,5 @@ public class UnitDeath : MonoBehaviour
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
         Destroy(gameObject);
-        gameObject.SetActive(false);
-
     }
 }

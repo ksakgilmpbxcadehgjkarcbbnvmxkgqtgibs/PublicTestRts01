@@ -8,23 +8,24 @@ public class GameInstaller : MonoInstaller
     private GameObject _unitPrefab;
     public override void InstallBindings()
     {
-        BindingSpecialZenject<Image>("SelectionBox");
+        BindById<Image>("SelectionBox");
 
-        BindingZenject<UiManager>();
-        BindingZenject<SelectionManager>();
-        BindingZenject<InputManager>();
+        BindComponent<UiManager>();
+        BindComponent<SelectionManager>();
+        BindComponent<InputManager>();
+        BindInstance(Camera.main);
 
-        Container.BindInstance(Camera.main).AsSingle();
-        BindingSimpleZenject<UnitListManager>();
+        ;
+        Binding<UnitListManager>();
 
 
-        BindingFactoryZenject<UnitFactory, UnitFactory.Factory,UnitLocalInstaller>(_unitPrefab, "Units");
+        BindingFactory<UnitFactory, UnitFactory.Factory,UnitLocalInstaller>(_unitPrefab, "Units");
     }
-
-    private void BindingSimpleZenject<T>() => Container.Bind<T>().AsSingle();
-    private void BindingZenject<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
-    private void BindingSpecialZenject<T>(string Id) => Container.Bind<T>().WithId(Id).FromComponentInHierarchy().AsSingle();
-    private void BindingFactoryZenject<Tcomp, Tfactory, Tinstaller>(Object prefab,string group = "Group")
+    private void BindInstance(Object ob) => Container.BindInstance(ob).AsSingle();
+    private void Binding<T>() => Container.Bind<T>().AsSingle();
+    private void BindComponent<T>() => Container.Bind<T>().FromComponentInHierarchy().AsSingle();
+    private void BindById<T>(string Id) => Container.Bind<T>().WithId(Id).FromComponentInHierarchy().AsSingle();
+    private void BindingFactory<Tcomp, Tfactory, Tinstaller>(Object prefab,string group = "Group")
         where Tcomp : Component
         where Tfactory : PlaceholderFactory<Vector3,Quaternion,Tcomp>
         where Tinstaller : MonoInstaller
