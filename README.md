@@ -1,55 +1,95 @@
 # RTS Prototype (Unity)
 
-Технический RTS-прототип, сфокусированный на масштабируемой игровой архитектуре и чистом коде.  
-Technical RTS prototype focused on scalable gameplay architecture and clean code practices.
+Technical RTS prototype focused on scalable gameplay architecture, modular gameplay systems, and maintainable code practices.
+
+The project explores approaches to building decoupled RTS gameplay systems using dependency injection, reactive programming, and asynchronous workflows in Unity.
 
 ### 🎮 Демонстрация геймплея:
 ![Демонстрация геймплея](Media/ReadMe.gif)
 
-## Features / Возможности
+## Features
 
-- RTS-механика выбора и перемещения юнитов  
-  RTS-style unit selection and movement
+- RTS-style unit selection and movement
 
-- Поведение юнитов разделено на независимые модульные компоненты  
-  Unit behaviour split into modular components
+- Modular composable unit behaviour system
 
-- Реактивная обработка событий с использованием UniRx  
-  Reactive event handling with UniRx
+- Reactive event handling with UniRx
 
-- Асинхронные операции через UniTask  
-  Async operations via UniTask
+- Async operations via UniTask
 
-- Dependency Injection с использованием Zenject  
-  Dependency Injection using Zenject
+- Dependency Injection using Zenject
 
-- Слабо связанная игровая архитектура  
-  Decoupled gameplay systems
+- Loosely coupled gameplay architecture
 
-- Базовый UI для выбора юнитов  
-  Basic UI for unit selection
+- UI layer separated from gameplay domain logic
 
-## Architecture / Архитектура
+## Architecture
 
-Проект построен с использованием принципов разделения ответственности.  
 The project follows separation of concerns principles.
 
-- Игровая логика отделена от представления  
-  Gameplay logic separated from presentation
+- Gameplay logic separated from presentation
 
-- Модульное поведение юнитов  
-  Modular unit behaviours
+- Modular unit behaviours
 
-- Сервис-ориентированная архитектура  
-  Service-oriented systems
+- Service-oriented gameplay systems
 
-- Dependency Injection через Zenject  
-  Dependency injection via Zenject
+- Dependency injection via Zenject
 
-## Tech Stack / Технологии
+## Tech Stack
 
-- Unity
-- C#
-- Zenject
-- UniRx
-- UniTask
+| Area | Technology |
+|---|---|
+| Engine | Unity |
+| Language | C# |
+| DI | Zenject |
+| Reactive | UniRx |
+| Async | UniTask |
+
+## Why
+
+Zenject is used to reduce coupling between gameplay systems and improve extensibility.
+
+UniRx is used for reactive event propagation between gameplay systems.
+
+UniTask is used to simplify asynchronous gameplay flows without heavy coroutine chaining.
+
+## Engineering Goals
+
+This prototype is primarily focused on:
+
+- scalable gameplay architecture
+- maintainable gameplay systems
+- separation of concerns
+- low coupling between systems
+- extensibility for future RTS mechanics
+
+## Planned Features
+
+- Unit combat system
+- Fog of war
+- Object pooling
+- Addressables integration
+- AI behaviours
+- Mobile optimization
+- Editor tooling
+
+## Technical Focus
+
+- gameplay architecture
+- decoupled systems
+- maintainability
+- scalability
+- reactive workflows
+- dependency injection
+
+## Project Structure
+
+Assets/
+ ├── Prefabs/
+ ├── Scenes/
+ ├── Media/
+ └── Scripts/
+		├── GameSettings
+		├── Models
+		├── Units
+		└── Helpers
