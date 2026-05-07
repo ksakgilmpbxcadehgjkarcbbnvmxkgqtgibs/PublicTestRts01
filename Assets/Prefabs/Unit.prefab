@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 7020934434921407531}
   - component: {fileID: 6101670645081113851}
   - component: {fileID: 4869547521783161586}
+  - component: {fileID: 5770278394384759404}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -236,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897ed33e6c8e0c144bc48b1625cf5a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAttribute
-  hitPoint: 100
+  hitPoint:
+    value: 0
 --- !u!114 &7020934434921407531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitLocalInstaller
   _selectionCircle: {fileID: 8849931323925439569}
-  _unitComponent: {fileID: 3450826412871017774}
 --- !u!114 &4869547521783161586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +282,18 @@ MonoBehaviour:
   _findSiblingMonoInstallers: 1
   _autoRun: 1
   _kernel: {fileID: 0}
+--- !u!114 &5770278394384759404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843849512017345864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe4e45287574b747899890916c1ae92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitDeath
 --- !u!1 &8849931323925439569
 GameObject:
   m_ObjectHideFlags: 0

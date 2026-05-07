@@ -20,6 +20,7 @@ public class UnitLocalInstaller : MonoInstaller
         BindingZenject<UnitVisuals>();
         BindingZenject<UnitSelecting>();
         BindingZenject<UnitFactory>();
+        BindingZenject<UnitAttribute>();
 
     }
 
