@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
     "com.svermeulen.extenject": "https://github.com/Mathijs-Bakker/Extenject.git?path=/UnityProject/Assets/Plugins/Zenject",
     "com.unity.addressables.android": "1.0.10",
     "com.unity.ai.navigation": "2.0.12",

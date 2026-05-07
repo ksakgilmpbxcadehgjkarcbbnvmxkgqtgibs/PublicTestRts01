@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -8,8 +9,11 @@ using Zenject;
 
 public class InputManager : MonoBehaviour
 {
-    public static event Action<ClickEntity> OnButtonClick;
-    public static event Action<List<UnitSelecting>> OnGroupClick;
+    private Subject<ClickEntity> OnButtonClick = new Subject<ClickEntity>();
+    public IObservable<ClickEntity> OnButtonClickObservable => OnButtonClick;
+
+    private Subject<List<UnitSelecting>> OnGroupClick = new Subject<List<UnitSelecting>>();
+    public IObservable<List<UnitSelecting>> OnGroupClickObservable => OnGroupClick;
 
     private List<UnitSelecting> masTempSelect = new List<UnitSelecting>();
 
@@ -67,7 +71,7 @@ public class InputManager : MonoBehaviour
                         .Select(x => x.GetComponent<UnitSelecting>())
                         .ToList();
 
-                    OnGroupClick.Invoke(masTempSelect);
+                    OnGroupClick.OnNext(masTempSelect);
 
                     _uiManager.TurnOff();
                     _uiManager.SetBoardSize(Vector2.zero);
@@ -99,7 +103,7 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             var click = ClickEntity.CreateClick(buttonControl, hit);
-            OnButtonClick.Invoke(click);
+            OnButtonClick.OnNext(click);
         }
     }
 

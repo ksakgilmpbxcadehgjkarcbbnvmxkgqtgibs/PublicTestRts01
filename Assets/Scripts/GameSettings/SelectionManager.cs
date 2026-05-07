@@ -1,29 +1,32 @@
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 
 public class SelectionManager : MonoBehaviour
 {
     private List<UnitSelecting> _selectUnits = new List<UnitSelecting>();
 
-    private void OnEnable()
-    {
-        InputManager.OnButtonClick += ClickInUnit;
-        InputManager.OnGroupClick += GroupClick;
+    [Inject]
+    private InputManager _inputManager;
 
-    }
-    private void OnDisable()
+    private void Start()
     {
-        InputManager.OnButtonClick -= ClickInUnit;
-        InputManager.OnGroupClick -= GroupClick;
+        _inputManager.OnButtonClickObservable
+            .Where(clickEntity => clickEntity.button == Mouse.current.leftButton)
+            .Subscribe(ClickInUnit)
+            .AddTo(this);
+
+        _inputManager.OnGroupClickObservable
+            .Subscribe(GroupClick)
+            .AddTo(this);
+
     }
 
     private void ClickInUnit(ClickEntity clickEntity)
     {
-        if (clickEntity.button != Mouse.current.leftButton)
-            return;
-
         if (clickEntity.raycastHit.collider.TryGetComponent(out UnitSelecting unitSelecting))
         {
             UnSelectingGtoup();

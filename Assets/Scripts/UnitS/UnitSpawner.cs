@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -11,27 +12,27 @@ public class UnitSpawner : MonoBehaviour
     [Inject]
     private UnitListManager _unitListManager;
 
+    [Inject]
+    private InputManager _inputManager;
+
     private float _cooldownTimer = 1f;
     private float _nextSpawnTime = 0;
 
-    private void OnEnable() => InputManager.OnButtonClick += SpawnUnit;
-    private void OnDisable() => InputManager.OnButtonClick -= SpawnUnit;
+    private void Start()
+    {
+        _inputManager
+            .OnButtonClickObservable
+            .Where(clickEntity =>clickEntity.button == Keyboard.current.spaceKey 
+            && Time.time > _nextSpawnTime 
+            && clickEntity.raycastHit.collider != null)// ≈сли игрок тыкает вне игрово пол€ ... как то
+            .Subscribe(SpawnUnit)
+            .AddTo(this);
+    }
 
     private void SpawnUnit(ClickEntity clickEntity)
     {
-        if (Time.time < _nextSpawnTime)
-            return;
-
-        if (clickEntity.button != Keyboard.current.spaceKey) 
-            return;
-
-        // ≈сли игрок тыкает вне игрово пол€ ... как то
-        if (clickEntity.raycastHit.collider == null)
-            return;
-
         _nextSpawnTime = _cooldownTimer + Time.time;
          var unitCreate = _unitFactory.Create(clickEntity.raycastHit.point, Quaternion.identity);
-
         _unitListManager.AddUnitInList(unitCreate.gameObject);
     }
 }

@@ -1,6 +1,8 @@
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class UnitMovementNav : MonoBehaviour
 {
@@ -12,24 +14,26 @@ public class UnitMovementNav : MonoBehaviour
 
     private UnitSelecting _unitSelecting;
 
+    [Inject]
+    private InputManager _inputManager;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _unitVisuals = GetComponent<UnitVisuals>();
         _unitSelecting = GetComponent<UnitSelecting>();
     }
-
-    private void OnEnable() => InputManager.OnButtonClick += MoveToTarget;
-    private void OnDisable() => InputManager.OnButtonClick -= MoveToTarget;
+    private void Start()
+    {
+        _inputManager.OnButtonClickObservable
+            .Where(clickEntity => clickEntity.button == Mouse.current.rightButton
+            && _unitSelecting.GetSelect())
+            .Subscribe(MoveToTarget)
+            .AddTo(this);
+    }
 
     private void MoveToTarget(ClickEntity target)
     {
-        if (target.button != Mouse.current.rightButton)
-            return;
-
-        if (!_unitSelecting.GetSelect())
-            return;
-
         _agent.SetDestination(target.raycastHit.point);
         _target = target.raycastHit.point;
 

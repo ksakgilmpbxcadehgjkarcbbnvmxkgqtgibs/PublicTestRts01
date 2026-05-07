@@ -12,6 +12,8 @@ public class GameInstaller : MonoInstaller
 
         BindingZenject<UiManager>();
         BindingZenject<SelectionManager>();
+        BindingZenject<InputManager>();
+
         Container.BindInstance(Camera.main).AsSingle();
         BindingSimpleZenject<UnitListManager>();
 
