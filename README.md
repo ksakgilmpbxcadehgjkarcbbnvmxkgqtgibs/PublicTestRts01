@@ -4,7 +4,7 @@
 Technical RTS prototype focused on scalable gameplay architecture and clean code practices.
 
 ### 🎮 Демонстрация геймплея:
-![](Media/ReadMe.mp4)
+![Демонстрация геймплея](Media/ReadMe.gif)
 
 ## Features / Возможности
 
