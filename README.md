@@ -84,6 +84,7 @@ This prototype is primarily focused on:
 
 ## Project Structure
 
+```
 Assets/
  ├── Prefabs/
  ├── Scenes/
@@ -93,3 +94,4 @@ Assets/
 		├── Models
 		├── Units
 		└── Helpers
+```
