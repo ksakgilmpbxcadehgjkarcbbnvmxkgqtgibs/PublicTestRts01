@@ -3,6 +3,9 @@
 Технический RTS-прототип, сфокусированный на масштабируемой игровой архитектуре и чистом коде.  
 Technical RTS prototype focused on scalable gameplay architecture and clean code practices.
 
+### 🎮 Демонстрация геймплея:
+<video src="Media/ReadMe.mp4" autoplay loop muted playsinline width="100%"></video>
+
 ## Features / Возможности
 
 - RTS-механика выбора и перемещения юнитов  
